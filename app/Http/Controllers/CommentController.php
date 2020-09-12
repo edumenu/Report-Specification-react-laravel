@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comment;
+use App\Report;
+use Illuminate\Foundation\Console\Presets\React;
 
 class CommentController extends Controller
 {
@@ -12,10 +14,20 @@ class CommentController extends Controller
         return Comment::all();
     }
 
-    public function show(Comment $comment)
+    public function showOne(Comment $comment)
     {
+
         return response()->json([
             'comment' => $comment,
+        ], 202);
+    }
+
+    public function show($id)
+    {
+        $comments = Comment::where('report_id', $id)->get();
+
+        return response()->json([
+            'comments' => $comments,
         ], 202);
     }
 

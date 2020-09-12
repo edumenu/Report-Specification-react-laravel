@@ -54,6 +54,7 @@ function Report(props) {
                                 </div>
 
                                 <div className="card-body mt-5">
+                                    {  }
                                     <div className="card border-light mb-3">
                                         <div className="card-header">Edem Dumenu</div>
                                         <div className="card-body">
@@ -90,5 +91,5 @@ function Report(props) {
     )
 }
 
-export default inject("ReportStore")(observer(Report));
+export default inject("ReportStore", "CommentStore")(observer(Report));
 

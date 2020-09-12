@@ -36,7 +36,8 @@ Route::delete('reports/{report}','ReportController@delete');
 
 // Comment
 Route::get('comments','CommentController@index');
-Route::get('comments/{comment}','CommentController@show');
+Route::get('comment/{comment}','CommentController@showOne');
+Route::get('comments/{id}','CommentController@show');
 Route::post('comments','CommentController@store');
 Route::delete('comments/{comment}','CommentController@delete');
 
