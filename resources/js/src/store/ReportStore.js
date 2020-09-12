@@ -6,6 +6,7 @@ configure({ enforceActions: "observed" });  // don't allow state modifications o
 
 class ReportStore {
     reports = {};
+    report = {};
 
     loadAllReports = async () => {
         axios.get("http://127.0.0.1:8000/api/reports").then(response => {
@@ -18,12 +19,24 @@ class ReportStore {
             });
     }
 
+    loadOneReport = async (id) => {
+        axios.get(`http://127.0.0.1:8000/api/reports/${id}`).then(response => {
+            runInAction(() => {
+                this.report = response.data
+            });
+        })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
 
 
 }
 
 decorate(ReportStore, {
-    reports: observable
+    reports: observable,
+    report: observable
 });
 
 export default new ReportStore();

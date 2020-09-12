@@ -18,7 +18,7 @@ class ReportsTableSeeder extends Seeder
 
         for($i = 0; $i < 20; $i++){
             Report::create([
-                'report_name'=> $faker->sentence,
+                'report_name'=> $faker->company,
                 'report_study'=> $faker->company,
                 'comment_id'=> $faker->numberBetween($min = 1, $max = 10),
                 'study_id'=> $faker->numberBetween($min = 1, $max = 10),

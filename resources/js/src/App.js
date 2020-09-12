@@ -93,15 +93,13 @@ class App extends Component {
                     <Route exact path="/">
                         <Home />
                     </Route>
-                    <Route path="/report">
-                        <Report />
-                    </Route>
+                    <Route path="/report/:id" component={Report} />
                     <Route path="/dashboard">
                         {loggedIn === 'true' ? <Dashboard /> : <Redirect to="/" />}
                     </Route>
-                    {/* <Route path="/profile">
+                    <Route path="/profile">
                         {loggedIn === 'true' ? <Profile handleUserState={this.handleUserState} user={user} /> : <Redirect to="/" />}
-                    </Route> */}
+                    </Route>
                     <Route path="/reportTable">
                         {loggedIn === 'true' ? <ReportTable /> : <Redirect to="/" />}
                     </Route>

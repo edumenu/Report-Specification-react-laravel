@@ -9,14 +9,14 @@ export default function TableRow({ id, report_name, study, status, totalComments
         cursor: 'pointer'
     }
 
-    function reportSelect(){
-        history.push(`/report`);
+    function reportSelect(id){
+        history.push(`/report/${id}`);
     }
 
 
     return (
         <>
-            <tr className="d-flex" style={rowStyle} onClick={reportSelect}>
+            <tr className="d-flex" style={rowStyle} onClick={reportSelect.bind(this, id)}>
                 <td className="col-2">{id}</td>
                 <td className="col-3">{report_name}</td>
                 <td className="col-3">{study}</td>

@@ -19,7 +19,7 @@ class CreateCommentsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('report_id');
             $table->string('comment_author');
-            $table->string('comment_content');
+            $table->string('comment_content', 700);
 
             $table->index('user_id');
             $table->index('report_id');
