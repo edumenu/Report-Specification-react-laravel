@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { observer, inject } from "mobx-react";
 import spinner from '../assests/images/spinner.gif';
+import CommentCard from '../components/CommentCard';
 
 
 function Report(props) {
@@ -54,13 +55,9 @@ function Report(props) {
                                 </div>
 
                                 <div className="card-body mt-5">
-                                    {  }
-                                    <div className="card border-light mb-3">
-                                        <div className="card-header">Edem Dumenu</div>
-                                        <div className="card-body">
-                                            <h5 className="card-title">Warning card title</h5>
-                                        </div>
-                                    </div>
+                                    {
+                                        <CommentCard />
+                                    }
 
                                     <nav aria-label="Page navigation example">
                                         <ul className="pagination justify-content-center">

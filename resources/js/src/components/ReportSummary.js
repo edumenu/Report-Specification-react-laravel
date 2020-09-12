@@ -46,7 +46,7 @@ function ReportSummary({ comments, reports }) {
                                             reports.map((report, index) => (
                                                 <TableRow key={report.id} id={report.id} report_name={report.report_name}
                                                 study={report.report_study} status={report.report_status}
-                                                totalComments={indexCounter(comments, report.id, "commentsPerReport")} />
+                                                totalComments={indexCounter(comments, report.id, "commentsPerReportLength")} />
                                             ))}
                                     </tbody>
                                 </table>

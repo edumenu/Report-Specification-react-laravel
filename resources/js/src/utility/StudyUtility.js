@@ -3,8 +3,10 @@ export const indexCounter = (objArr, index, type) => {
     switch(type){
         case "reportsPerStudy":
             return objArr.filter(item => item.study_id === index).length;
-        case "commentsPerReport":
+        case "commentsPerReportLength":
             return objArr.filter(item => item.report_id === index).length;
+        case "commentsPerReport":
+            return objArr.filter(item => item.report_id === index);
         default:
             return 0;
     }
