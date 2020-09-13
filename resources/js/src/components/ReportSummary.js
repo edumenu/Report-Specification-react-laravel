@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { observer, inject } from "mobx-react";
 import TableRow from './TableRow';
 import PropTypes from 'prop-types';
 import spinner from '../assests/images/spinner.gif';

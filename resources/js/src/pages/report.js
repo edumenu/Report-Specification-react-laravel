@@ -2,25 +2,33 @@ import React, { useState, useEffect } from 'react';
 import { observer, inject } from "mobx-react";
 import spinner from '../assests/images/spinner.gif';
 import CommentCard from '../components/CommentCard';
+import { indexCounter } from '../utility/StudyUtility';
+import { useParams } from 'react-router-dom'
 
 
 function Report(props) {
     const [userComment, setUserComment] = useState('');
     const [report, setReport] = useState([]);
+    const [comments, setComments] = useState();
     const [loading, setLoading] = useState(true);
+    const params = useParams();
 
 
     useEffect(() => {
-        props.ReportStore.loadOneReport(props.match.params.id);
+        props.RootStore.ReportStore.loadOneReport(params.id);
+        props.RootStore.CommentStore.loadCommentsPerReport(params.id);
         setTimeout(() => {
-            searchReport(props.ReportStore.report);
+            searchReport();
             setLoading(false);
-        }, 1000);
+        }, 1500);
     }, [])
 
-    function searchReport(report) {
-        setReport(report);
-        console.log(report);
+    function searchReport() {
+        setReport(props.RootStore.ReportStore.report);
+        setComments(props.RootStore.CommentStore.commentsPerReports.comments);
+        // console.log(props.RootStore.ReportStore.report);
+        console.log(props.RootStore.ReportStore.report);
+        console.log(props.RootStore.CommentStore.commentsPerReports);
     }
 
     function onSubmit() {
@@ -56,9 +64,11 @@ function Report(props) {
 
                                 <div className="card-body mt-5">
                                     {
-                                        <CommentCard />
+                                        (comments.length !== 0 && comments !== undefined && loading === false) &&
+                                        comments.map(comment => (
+                                            <CommentCard key={comment.id} comment_author={comment.comment_author} comment_content={comment.comment_content} created_at={comment.created_at} />
+                                        ))
                                     }
-
                                     <nav aria-label="Page navigation example">
                                         <ul className="pagination justify-content-center">
                                             <li className="page-item disabled">
@@ -80,7 +90,8 @@ function Report(props) {
                                 <div className="card shadow-lg border-0 rounded-lg mt-1">
                                     <h2 className="text-center font-weight-bold my-5">Report cannot be found</h2>
                                 </div>
-                            </>}
+                            </>
+                        }
                     </div>
                 </div>
             </div>
@@ -88,5 +99,5 @@ function Report(props) {
     )
 }
 
-export default inject("ReportStore", "CommentStore")(observer(Report));
+export default inject("RootStore")(observer(Report));
 

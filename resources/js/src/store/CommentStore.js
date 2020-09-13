@@ -5,7 +5,8 @@ import { observer } from 'mobx-react';
 configure({ enforceActions: "observed" });  // don't allow state modifications outside actions
 
 class CommentStore {
-    comments = {}
+    comments = {};
+    commentsPerReports = {};
 
     loadAllComments = async () => {
         axios.get("http://127.0.0.1:8000/api/comments").then(response => {
@@ -15,6 +16,17 @@ class CommentStore {
         }).catch(error =>{
             console.log(error);
         });
+    }
+
+    loadCommentsPerReport = async (id) => {
+        axios.get(`http://127.0.0.1:8000/api/comments/${id}`).then(response => {
+            runInAction(() => {
+                this.commentsPerReports = response.data
+            });
+        })
+            .catch(err => {
+                console.log(err);
+            });
     }
 }
 

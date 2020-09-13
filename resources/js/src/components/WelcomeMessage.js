@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { observer, inject } from 'mobx-react';
-function WelcomeMessage({ user, loggedIn }) {
-    const [displayMessage, setDisplaymessage] = useState("false");
+import React from 'react';
+function WelcomeMessage() {
 
     return (
         <div className="ml-3">
@@ -11,4 +9,3 @@ function WelcomeMessage({ user, loggedIn }) {
 }
 
 export default WelcomeMessage;
-

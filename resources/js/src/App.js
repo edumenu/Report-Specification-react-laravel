@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 
 import { observer, inject } from "mobx-react";
-import { Provider } from "mobx-react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import ReportTable from './admin/ReportTable';
@@ -16,20 +14,34 @@ import Login from './auth/Login';
 import Signup from './auth/Signup';
 import Home from './pages/Home';
 import Report from './pages/report';
-import RootStore from "./store/RootStore";
 
 class App extends Component {
 
     state = {
         loggedIn: localStorage.getItem('loggedIn') || '',
         user: {},
-        studies: {},
-        reports: {},
-        comments: {},
+        studies: [],
+        reports: [],
+        comments: [],
     }
 
     componentDidMount() {
+        this.props.RootStore.StudyStore.loadAllStudies();
+        this.props.RootStore.ReportStore.loadAllReports();
+        this.props.RootStore.CommentStore.loadAllComments();
         this.findUser();
+
+        setTimeout(() => {
+            this.handleAllData();
+        }, 1000);
+    }
+
+    handleAllData = () => {
+        this.setState({
+            studies: this.props.RootStore.StudyStore.studies,
+            reports: this.props.RootStore.ReportStore.reports,
+            comments: this.props.RootStore.CommentStore.comments,
+        });
     }
 
     handleUserState = (data) => {
@@ -82,7 +94,7 @@ class App extends Component {
 
 
     render() {
-        const { loggedIn, user } = this.state;
+        const { loggedIn, user, studies, reports, comments } = this.state;
 
         return (
             <Router>
@@ -91,9 +103,11 @@ class App extends Component {
                 <WelcomeMessage loggedIn={loggedIn} user={user} />
                 <Switch>
                     <Route exact path="/">
-                        <Home />
+                        <Home studies={studies} reports={reports} comments={comments} />
                     </Route>
-                    <Route path="/report/:id" component={Report} />
+                    <Route path="/report/:id">
+                        <Report reports={reports} comments={comments}/>
+                    </Route>
                     <Route path="/dashboard">
                         {loggedIn === 'true' ? <Dashboard /> : <Redirect to="/" />}
                     </Route>
@@ -116,16 +130,14 @@ class App extends Component {
 }
 
 // export default App;
-export default inject("StudyStore", "ReportStore", "CommentStore")(observer(App));
+export default inject("RootStore")(observer(App));
 
 
-if (document.getElementById('App')) {
-    ReactDOM.render(
-        <Provider
-            StudyStore={RootStore.StudyStore}
-            ReportStore={RootStore.ReportStore}
-            CommentStore={RootStore.CommentStore}>
-            <App />
-        </Provider>
-        , document.getElementById('App'));
-}
+// if (document.getElementById('App')) {
+//     ReactDOM.render(
+//         <Provider
+//             RootStore={RootStore}>
+//             <App />
+//         </Provider>
+//         , document.getElementById('App'));
+// }

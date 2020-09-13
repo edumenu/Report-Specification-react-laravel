@@ -24,7 +24,7 @@ class CommentController extends Controller
 
     public function show($id)
     {
-        $comments = Comment::where('report_id', $id)->get();
+        $comments = Comment::where('report_id', $id)->paginate(2);
 
         return response()->json([
             'comments' => $comments,

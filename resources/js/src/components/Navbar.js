@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { observer, inject } from 'mobx-react';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Navbar({ handleLogout, loggedIn, user }) {
