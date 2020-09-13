@@ -10,16 +10,17 @@ function Report(props) {
     const [userComment, setUserComment] = useState('');
     const [report, setReport] = useState([]);
     const [comments, setComments] = useState();
-    const [loading, setLoading] = useState(true);
+    const [cardloading, setCarLoading] = useState(true);
+    const [commentloading, setCommentLoading] = useState(false);
     const params = useParams();
 
 
     useEffect(() => {
         props.RootStore.ReportStore.loadOneReport(params.id);
-        props.RootStore.CommentStore.loadCommentsPerReport(params.id);
+        props.RootStore.CommentStore.loadCommentsPerReport(params.id, "default");
         setTimeout(() => {
             searchReport();
-            setLoading(false);
+            setCarLoading(false);
         }, 1500);
     }, [])
 
@@ -27,8 +28,22 @@ function Report(props) {
         setReport(props.RootStore.ReportStore.report);
         setComments(props.RootStore.CommentStore.commentsPerReports.comments);
         // console.log(props.RootStore.ReportStore.report);
-        console.log(props.RootStore.ReportStore.report);
-        console.log(props.RootStore.CommentStore.commentsPerReports);
+        // console.log(props.RootStore.ReportStore.report);
+        // console.log(props.RootStore.CommentStore.commentsPerReports);
+    }
+
+    function searchComments(searchType) {
+        setCommentLoading(true);
+        switch (searchType) {
+            case "next":
+                props.RootStore.CommentStore.loadCommentsPerReport(params.id, "nextPrevious", comments.next_page_url, null);
+                break;
+
+        }
+        setTimeout(() => {
+            searchReport();
+            setCommentLoading(false);
+        }, 1500);
     }
 
     function onSubmit() {
@@ -39,7 +54,7 @@ function Report(props) {
         <div className="container-fluid text-blue centerCards">
             <div className="row">
                 <div className="col-12 col-md-4">
-                    <div className="card border-dark mb-3">
+                    <div className="card shadow-sm border-0 rounded-lg border-light mb-3">
                         <div className="card-header text-center font-weight-bold">Add a comment</div>
                         <div className="card-body">
                             <form onSubmit={onSubmit}>
@@ -50,9 +65,9 @@ function Report(props) {
                 </div>
 
                 <div className="col-12 col-md-8">
-                    <div className="card shadow-lg border-0 rounded-lg mt-1">
-                        {loading && <img className="my-auto mx-auto" src={spinner} alt="loading" />}
-                        {(report.length !== 0 && report !== undefined && loading === false) &&
+                    <div className="card shadow-sm border-0 rounded-lg mt-1">
+                        {cardloading && <img className="my-auto mx-auto" src={spinner} alt="loading" />}
+                        {(report.length !== 0 && report !== undefined && cardloading === false) &&
                             <>
                                 <div className="card">
                                     <div className="card-header font-weight-bold text-center"><h2>{report.report_name}</h2></div>
@@ -62,30 +77,30 @@ function Report(props) {
                                     </ul>
                                 </div>
 
-                                <div className="card-body mt-5">
-                                    {
-                                        (comments.length !== 0 && comments !== undefined && loading === false) &&
-                                        comments.map(comment => (
+                                {commentloading && <img className="my-auto mx-auto" src={spinner} alt="loading" />}
+
+                                <div className="card-body mt-2">
+                                    {(comments.length !== 0 && comments !== undefined && cardloading === false && commentloading === false) &&
+                                        comments.data.map(comment => (
                                             <CommentCard key={comment.id} comment_author={comment.comment_author} comment_content={comment.comment_content} created_at={comment.created_at} />
-                                        ))
-                                    }
+                                        ))}
                                     <nav aria-label="Page navigation example">
                                         <ul className="pagination justify-content-center">
-                                            <li className="page-item disabled">
-                                                <a className="page-link" href="#" tabIndex="-1">Previous</a>
+                                            <li className={`page-item ${comments.prev_page_url === null ? "disabled" : ""}`}>
+                                                <button className="page-link" onClick={searchComments} tabIndex="-1">Previous</button>
                                             </li>
-                                            <li className="page-item"><a className="page-link" href="#">1</a></li>
-                                            <li className="page-item"><a className="page-link" href="#">2</a></li>
-                                            <li className="page-item"><a className="page-link" href="#">3</a></li>
-                                            <li className="page-item">
-                                                <a className="page-link" href="#">Next</a>
+                                            <li className="page-item"><a className="page-link" onClick={searchComments}>1</a></li>
+                                            <li className="page-item"><a className="page-link" onClick={searchComments}>2</a></li>
+                                            <li className="page-item"><a className="page-link" onClick={searchComments}>3</a></li>
+                                            <li className={`page-item ${comments.next_page_url === null ? "disabled" : ""}`}>
+                                                <button className="page-link" onClick={() => searchComments("next")}>Next</button>
                                             </li>
                                         </ul>
                                     </nav>
                                 </div>
                             </>
                         }
-                        {(report.length === 0 && report !== undefined && loading === false) &&
+                        {(report.length === 0 && report !== undefined && cardloading === false) &&
                             <>
                                 <div className="card shadow-lg border-0 rounded-lg mt-1">
                                     <h2 className="text-center font-weight-bold my-5">Report cannot be found</h2>
