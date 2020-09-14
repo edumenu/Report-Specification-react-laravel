@@ -60,6 +60,20 @@ class CommentStore {
 
         }
     }
+
+    addComment = async (userName, userComment, user_id, id) => {
+        axios.post("http://127.0.0.1:8000/api/comments", {
+            comment_author: userName,
+            comment_content: userComment,
+            user_id: user_id,
+            report_id: id,
+        })
+        .then(response => {
+            console.log(response);
+        }).catch(error => {
+            console.log(error);
+        });
+    }
 }
 
 decorate(CommentStore, {

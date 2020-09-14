@@ -41,7 +41,7 @@ function ReportSummary({ comments, reports }) {
                                                 </td>
                                             </tr>}
 
-                                        {(reports.length !== 0 && loading === false) &&
+                                        {(Object.keys(reports).length !== 0 && loading === false) &&
                                             reports.map((report, index) => (
                                                 <TableRow key={report.id} id={report.id} report_name={report.report_name}
                                                 study={report.report_study} status={report.report_status}

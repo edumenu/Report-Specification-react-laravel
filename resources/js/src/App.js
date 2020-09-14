@@ -106,7 +106,7 @@ class App extends Component {
                         <Home studies={studies} reports={reports} comments={comments} />
                     </Route>
                     <Route path="/report/:id">
-                        <Report reports={reports} comments={comments}/>
+                        <Report reports={reports} comments={comments} user={user}/>
                     </Route>
                     <Route path="/dashboard">
                         {loggedIn === 'true' ? <Dashboard /> : <Redirect to="/" />}

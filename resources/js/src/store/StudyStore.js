@@ -4,7 +4,7 @@ import { configure, action, observable, runInAction, decorate } from 'mobx';
 configure({ enforceActions: "observed" });  // don't allow state modifications outside actions
 
 class StudyStore {
-    studies = []
+    studies = {};
 
     loadAllStudies = async () => {
         axios.get("http://127.0.0.1:8000/api/studies").then(response => {

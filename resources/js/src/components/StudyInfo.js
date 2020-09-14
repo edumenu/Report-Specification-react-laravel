@@ -20,14 +20,14 @@ function StudyInfo({ studies, reports }) {
                 <div className="list-group list-group-flush">
                     {loading && <img className="my-auto mx-auto" src={spinner} alt="loading" />}
                     {/* Print first line (All studies) */}
-                    {(studies.length !== 0 && studies !== undefined && loading === false) && <div><a href="#" className="list-group-item list-group-item-action">
+                    {(Object.keys(studies).length !== 0 && studies !== undefined && loading === false) && <div><a href="#" className="list-group-item list-group-item-action">
                         All Studies<span className="badge badge-primary badge-pill float-right">{ reports.length }</span></a></div>}
 
-                    {(studies.length !== 0 && studies !== undefined && loading === false) &&
+                    {(Object.keys(studies).length !== 0 && studies !== undefined && loading === false) &&
                         studies.map((study, index) => (
                             <StudyList key={study.id} id={study.id} study={study.study_name} totalReport={indexCounter(reports, study.id, "reportsPerStudy")} />
                         ))}
-                    {(studies.length == 0 && studies !== undefined && loading === false) && <h4>There are no studies</h4>}
+                    {(Object.keys(studies).length == 0 && studies !== undefined && loading === false) && <h4>There are no studies</h4>}
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@ import Pagination from '../components/Pagination';
 function Report(props) {
     const [userComment, setUserComment] = useState('');
     const [report, setReport] = useState([]);
-    const [userName, setUserName] = useState();
+    const [userName, setUserName] = useState('');
     const [comments, setComments] = useState();
     const [cardLoading, setCarLoading] = useState(true);
     const [commentLoading, setCommentLoading] = useState(false);
@@ -51,8 +51,10 @@ function Report(props) {
         }, 1500);
     }
 
-    function onSubmit() {
-        console.log("test");
+    function onSubmit(e) {
+        e.preventDefault();
+        let user_id = Object.keys(props.user).length === 0 ? 0 : props.user.id;
+        props.RootStore.CommentStore.addComment(userName, userComment, user_id, params.id);
     }
 
     return (
@@ -62,16 +64,19 @@ function Report(props) {
                     <div className="card shadow-sm border-0 rounded-lg border-light mb-3">
                         <div className="card-header text-center font-weight-bold">Add a comment</div>
                         <div className="card-body">
-                            <p>Add a comment to this report here so a programmer can review it</p>
+                            <p>Add a comment to the report so a programmer can review it</p>
                             <form onSubmit={onSubmit}>
                                 <label>
                                     Name:
-                                    <input className="form-control" value={userName} onChange={e => setUserName(e.target.value)} />
+                                    <input className="form-control" value={userName} onChange={(e) => setUserName(e.target.value)} />
                                 </label>
                                 <label>
                                     Comment:
-                                    <input className="form-control" value={userComment} onChange={e => setUserComment(e.target.value)} />
+                                    <input className="form-control" value={userComment} onChange={(e) => setUserComment(e.target.value)} />
                                 </label>
+                                <div className="mb-4 text-center">
+                                    <button className="btn btn-success text-center mt-5" type="submit"> Add comment </button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -80,7 +85,7 @@ function Report(props) {
                 <div className="col-12 col-md-8">
                     <div className="card shadow-sm border-0 rounded-lg mt-1">
                         {cardLoading && <img className="my-auto mx-auto" src={spinner} alt="loading" />}
-                        {(report.length !== 0 && report !== undefined && cardLoading === false) &&
+                        {(Object.keys(report).length  !== 0 && cardLoading === false) &&
                             <>
                                 <div className="card">
                                     <div className="card-header font-weight-bold text-center"><h2>{report.report_name}</h2></div>
@@ -93,16 +98,18 @@ function Report(props) {
                                 {commentLoading && <img className="my-auto mx-auto" src={spinner} alt="loading" />}
 
                                 <div className="card-body mt-2">
-                                    {(comments.length !== 0 && comments !== undefined && cardLoading === false && commentLoading === false) &&
+                                    {(Object.keys(comments).length !== 0 && cardLoading === false && commentLoading === false) &&
                                         comments.data.map(comment => (
                                             <CommentCard key={comment.id} comment_author={comment.comment_author} comment_content={comment.comment_content} created_at={comment.created_at} />
                                         ))}
+
+                                    {(Object.keys(comments.data).length === 0 && comments !== undefined && cardLoading === false && commentLoading === false) && <h3 className="text-center mb-5"> There no comments </h3>}
 
                                     <Pagination comments={comments} searchComments={searchComments} />
                                 </div>
                             </>
                         }
-                        {(report.length === 0 && report !== undefined && cardLoading === false) &&
+                        {(Object.keys(report).length === 0 && report !== undefined && cardLoading === false) &&
                             <>
                                 <div className="card shadow-lg border-0 rounded-lg mt-1">
                                     <h2 className="text-center font-weight-bold my-5">Report cannot be found</h2>
