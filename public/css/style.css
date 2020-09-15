@@ -50,3 +50,8 @@ tbody {
   .centerCards{
     margin-top: 5%;
   }
+
+  .dashboardCard{
+    margin-top: 3%;
+    max-width: 90%;
+  }

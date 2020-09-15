@@ -7,10 +7,14 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 export class dashboard extends Component {
     render() {
         return (
-            <>
+            <div className="container-fluid dashboardCard text-blue">
                 <CardSummary />
-                <ReportChart />
-            </>
+                <div className="row">
+                    <div className="col-12 col-md-6"> <ReportChart /></div>
+                    <div className="col-12 col-md-6"> <ReportChart /> </div>
+                </div>
+                {/* <ReportChart /> */}
+            </div>
         )
     }
 }

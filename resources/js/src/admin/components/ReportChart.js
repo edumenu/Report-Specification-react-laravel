@@ -17,12 +17,12 @@ function ReportChart() {
     ];
 
     return (
-        <div className="container text-blue">
+        <>
             <div className="card shadow-sm mb-5">
                 <div className="card-header font-weight-bold">Bar Chart</div>
                 {/* <h4 className="mt-3">Bar Chart</h4> */}
                 <h6 className="text-center mt-2">A bar chart provides a way of showing data values represented as vertical bars.</h6>
-                <BarChart width={900} height={300} data={data}
+                <BarChart width={500} height={250} data={data}
                     margin={{ top: 20, right: 10, left: 10, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
@@ -33,7 +33,7 @@ function ReportChart() {
                     <Bar dataKey="uv" fill="#e5e7ee" />
                 </BarChart>
             </div>
-        </div>
+        </>
     );
 }
 
