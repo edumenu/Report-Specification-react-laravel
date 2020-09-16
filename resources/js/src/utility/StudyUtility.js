@@ -9,6 +9,8 @@ export const indexCounter = (objArr, index, type) => {
             return objArr.filter(item => item.id === index);
         case "commentsPerReport":
             return objArr.filter(item => item.report_id === index);
+        case "numberOfUsers":
+            return objArr.filter(item => item.role === index).length;
         default:
             return 0;
     }

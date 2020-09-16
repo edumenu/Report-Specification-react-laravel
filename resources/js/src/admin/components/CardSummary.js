@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { indexCounter } from '../../utility/StudyUtility';
 
-function CardSummary() {
+function CardSummary(props) {
+
+    useEffect(() => {
+        // console.log(props);
+    });
 
     return (
         <>
@@ -20,7 +25,7 @@ function CardSummary() {
                             </div>
                         </div>
                         <div className="card-body text-center">
-                            <h3>100</h3>
+                            <h3>{props.reports.length}</h3>
                         </div>
                     </div>
                 </div>
@@ -36,7 +41,7 @@ function CardSummary() {
                             </div>
                         </div>
                         <div className="card-body text-center">
-                            <h3>165</h3>
+                            <h3>{props.studies.length}</h3>
                         </div>
                     </div>
                 </div>
@@ -53,7 +58,7 @@ function CardSummary() {
                             </div>
                         </div>
                         <div className="card-body text-center">
-                            <h3>5</h3>
+                            <h3>{indexCounter(props.users, "Programmer", "numberOfUsers")}</h3>
                         </div>
                     </div>
                 </div>
@@ -69,7 +74,7 @@ function CardSummary() {
                             </div>
                         </div>
                         <div className="card-body text-center">
-                            <h3>5</h3>
+                            <h3>{indexCounter(props.users, "Data Manager", "numberOfUsers")}</h3>
                         </div>
                     </div>
                 </div>

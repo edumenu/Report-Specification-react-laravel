@@ -20,6 +20,7 @@ class App extends Component {
     state = {
         loggedIn: localStorage.getItem('loggedIn') || '',
         user: {},
+        users: {},
         studies: [],
         reports: [],
         comments: [],
@@ -29,6 +30,7 @@ class App extends Component {
         this.props.RootStore.StudyStore.loadAllStudies();
         this.props.RootStore.ReportStore.loadAllReports();
         this.props.RootStore.CommentStore.loadAllComments();
+        this.props.RootStore.UserStore.loadAllUsers();
         this.findUser();
 
         setTimeout(() => {
@@ -41,6 +43,7 @@ class App extends Component {
             studies: this.props.RootStore.StudyStore.studies,
             reports: this.props.RootStore.ReportStore.reports,
             comments: this.props.RootStore.CommentStore.comments,
+            users: this.props.RootStore.UserStore.users,
         });
     }
 
@@ -94,7 +97,7 @@ class App extends Component {
 
 
     render() {
-        const { loggedIn, user, studies, reports, comments } = this.state;
+        const { loggedIn, user, users, studies, reports, comments } = this.state;
 
         return (
             <Router>
@@ -109,7 +112,7 @@ class App extends Component {
                         <Report reports={reports} comments={comments} user={user}/>
                     </Route>
                     <Route path="/dashboard">
-                        {loggedIn === 'true' ? <Dashboard studies={studies} reports={reports} /> : <Redirect to="/" />}
+                        {loggedIn === 'true' ? <Dashboard studies={studies} reports={reports} users={users} /> : <Redirect to="/" />}
                     </Route>
                     <Route path="/profile">
                         {loggedIn === 'true' ? <Profile handleUserState={this.handleUserState} user={user} /> : <Redirect to="/" />}
