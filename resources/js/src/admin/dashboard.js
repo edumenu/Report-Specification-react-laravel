@@ -11,9 +11,15 @@ export class dashboard extends Component {
                 <CardSummary />
                 <div className="row mt-1">
                     <div className="col-12 col-md-6"> <ReportChart /></div>
-                    <div className="col-12 col-md-6"><Calendar className="calendarStyle shadow" /></div>
+                    <div className="col-12 col-md-6">
+                        <div className="card shadow-sm">
+                            <div className="card-header font-weight-bold">Calendar</div>
+                            <div class="card-body">
+                                <Calendar className="calendarStyle shadow" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                {/* <ReportChart /> */}
             </div>
         )
     }

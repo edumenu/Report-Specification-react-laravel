@@ -13,6 +13,11 @@ use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        return User::all();
+    }
+
     public function register(Request $request)
     {
         $request['email_verified_at'] = now();
@@ -132,9 +137,9 @@ class UserController extends Controller
             if ($request['name'] == '') $request['name'] = $user->name;
             if ($request['email'] == '') $request['email'] = $user->email;
             if ($request['role'] == '') $request['role'] = $user->role;
-            if ($request['password'] == ''){
-             $request['password'] = $user->password;
-            }else{
+            if ($request['password'] == '') {
+                $request['password'] = $user->password;
+            } else {
                 $request['password'] = Hash::make($request['password']);
             }
 

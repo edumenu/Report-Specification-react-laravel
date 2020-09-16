@@ -59,4 +59,5 @@ tbody {
   .calendarStyle{
       color: darkblue;
       margin: auto;
+      padding-top: auto;
   }

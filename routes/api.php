@@ -21,10 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Pages
+// Users
 Route::post('/login','UserController@login');
 Route::post('/register','UserController@register');
 Route::get('/logout','UserController@logout');
+Route::get('/users','UserController@index');
 Route::put('/user/{id}','UserController@updateUser');
 
 // Reports

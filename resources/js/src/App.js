@@ -33,7 +33,7 @@ class App extends Component {
 
         setTimeout(() => {
             this.handleAllData();
-        }, 1000);
+        }, 1500);
     }
 
     handleAllData = () => {
@@ -109,7 +109,7 @@ class App extends Component {
                         <Report reports={reports} comments={comments} user={user}/>
                     </Route>
                     <Route path="/dashboard">
-                        {loggedIn === 'true' ? <Dashboard /> : <Redirect to="/" />}
+                        {loggedIn === 'true' ? <Dashboard studies={studies} reports={reports} /> : <Redirect to="/" />}
                     </Route>
                     <Route path="/profile">
                         {loggedIn === 'true' ? <Profile handleUserState={this.handleUserState} user={user} /> : <Redirect to="/" />}
