@@ -33,7 +33,6 @@ export class dashboard extends Component {
             comments: this.props.RootStore.CommentStore.comments,
             users: this.props.RootStore.UserStore.users,
         });
-        console.log(this.state.users);
     }
 
     render() {
@@ -44,7 +43,7 @@ export class dashboard extends Component {
             <div className="container-fluid dashboardCard text-blue">
                 <CardSummary users={users} reports={reports} studies={studies}/>
                 <div className="row mt-1">
-                    <div className="col-12 col-md-6"> <ReportChart /></div>
+                    <div className="col-12 col-md-6"> <ReportChart reports={reports} /></div>
 
                     <div className="col-12 col-md-6">
                         <div className="card shadow-sm">

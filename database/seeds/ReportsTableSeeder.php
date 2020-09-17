@@ -16,13 +16,13 @@ class ReportsTableSeeder extends Seeder
 
         $faker = \Faker\Factory::create();
 
-        for($i = 0; $i < 20; $i++){
+        for($i = 0; $i < 50; $i++){
             Report::create([
                 'report_name'=> $faker->company,
                 'report_study'=> $faker->company,
                 'comment_id'=> $faker->numberBetween($min = 1, $max = 10),
                 'study_id'=> $faker->numberBetween($min = 1, $max = 10),
-                'report_status'=> 'pass',
+                'report_status'=> $faker->randomElement($array = array ('Passed','Failed','programming','testing')),
             ]);
         }
     }
