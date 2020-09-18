@@ -10,7 +10,7 @@ function StudyInfo({ studies, reports }) {
     useEffect(() => {
         setTimeout(() => {
             setLoading(false);
-        }, 1100);
+        }, 2000);
     }, []);
 
     return (

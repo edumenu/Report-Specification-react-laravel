@@ -108,7 +108,7 @@ class App extends Component {
                     <Route exact path="/">
                         <Home studies={studies} reports={reports} comments={comments} />
                     </Route>
-                    <Route path="/report/:id">
+                    <Route path="/reports/:id">
                         <Report reports={reports} comments={comments} user={user}/>
                     </Route>
                     <Route path="/dashboard">
@@ -118,7 +118,7 @@ class App extends Component {
                         {loggedIn === 'true' ? <Profile handleUserState={this.handleUserState} user={user} /> : <Redirect to="/" />}
                     </Route>
                     <Route path="/reportTable">
-                        {loggedIn === 'true' ? <ReportTable /> : <Redirect to="/" />}
+                        {loggedIn === 'true' ? <ReportTable reports={reports} comments={comments} /> : <Redirect to="/" />}
                     </Route>
                     <Route path="/login">
                         {loggedIn === 'false' ? <Login handleUserState={this.handleUserState} user={user} /> : <Redirect to="/dashboard" />}

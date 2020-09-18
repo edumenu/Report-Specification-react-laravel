@@ -30,7 +30,7 @@ class CommentStore {
                     .catch(err => {
                         console.log(err);
                     });
-                    break;
+                break;
 
 
             case "pageSelect":
@@ -42,9 +42,7 @@ class CommentStore {
                     .catch(err => {
                         console.log(err);
                     });
-                    break;
-
-
+                break;
 
             default:
                 axios.get(`http://127.0.0.1:8000/api/comments/${id}`).then(response => {
@@ -55,7 +53,7 @@ class CommentStore {
                     .catch(err => {
                         console.log(err);
                     });
-                    break;
+                break;
 
 
         }
@@ -68,11 +66,11 @@ class CommentStore {
             user_id: user_id,
             report_id: id,
         })
-        .then(response => {
-            console.log(response);
-        }).catch(error => {
-            console.log(error);
-        });
+            .then(response => {
+                console.log(response);
+            }).catch(error => {
+                console.log(error);
+            });
     }
 }
 

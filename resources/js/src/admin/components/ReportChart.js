@@ -11,16 +11,16 @@ function ReportChart(props) {
 
     const data = [
         {
-            name: 'Passed', uv: indexCounter(props.reports, "Passed", "numberOfStatus")
+            name: 'Passed', uv: indexCounter(props.reports, "passed", "numberOfStatus")
         },
         {
-            name: 'Failed', uv: indexCounter(props.reports, "Failed", "numberOfStatus")
+            name: 'Failed', uv: indexCounter(props.reports, "failed", "numberOfStatus")
         },
         {
-            name: 'Ready for programming', uv: indexCounter(props.reports, "programming", "numberOfStatus")
+            name: 'Programming', uv: indexCounter(props.reports, "programming", "numberOfStatus")
         },
         {
-            name: 'Ready for testing', uv: indexCounter(props.reports, "testing", "numberOfStatus")
+            name: 'Testing', uv: indexCounter(props.reports, "testing", "numberOfStatus")
         }
     ];
 

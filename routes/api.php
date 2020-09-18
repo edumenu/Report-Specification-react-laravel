@@ -33,6 +33,7 @@ Route::get('reports','ReportController@index');
 Route::get('reports/{report}','ReportController@show');
 Route::post('reports','ReportController@store');
 Route::put('reports/{report}','ReportController@update');
+Route::put('reports/{id}/{status}','ReportController@updateStatus');
 Route::delete('reports/{report}','ReportController@delete');
 
 // Comment

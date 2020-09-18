@@ -10,7 +10,7 @@ export default function TableRow({ id, report_name, study, status, totalComments
     }
 
     function reportSelect(id){
-        history.push(`/report/${id}`);
+        history.push(`/reports/${id}`);
     }
 
 

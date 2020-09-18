@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Report;
+use Composer\XdebugHandler\Status;
 
 class ReportController extends Controller
 {
@@ -27,6 +28,21 @@ class ReportController extends Controller
         $report->update($request->all());
 
         return response()->json($report, 200);
+    }
+
+    public function updateStatus($id, $status)
+    {
+        $report = Report::find($id);
+
+        if ($report) {
+            $report->report_status = $status;
+            $report->save();
+        }
+
+        return response()->json([
+            'report' => $report,
+            'message' => 'Report status has been changed to '. $status
+        ], 200);
     }
 
     public function delete($report)

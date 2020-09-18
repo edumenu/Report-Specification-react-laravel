@@ -18,13 +18,17 @@ function Report(props) {
 
 
     useEffect(() => {
+        loadReportPage();
+    }, [])
+
+    function loadReportPage() {
         props.RootStore.ReportStore.loadOneReport(params.id);
         props.RootStore.CommentStore.loadCommentsPerReport(params.id, "default");
         setTimeout(() => {
             searchReport();
             setCarLoading(false);
-        }, 1500);
-    }, [])
+        }, 2000);
+    }
 
     function searchReport() {
         setReport(props.RootStore.ReportStore.report);
@@ -55,6 +59,11 @@ function Report(props) {
         e.preventDefault();
         let user_id = Object.keys(props.user).length === 0 ? 0 : props.user.id;
         props.RootStore.CommentStore.addComment(userName, userComment, user_id, params.id);
+        loadReportPage();
+    }
+
+    function changeStatus(status){
+        console.log(status);
     }
 
     return (
@@ -85,31 +94,45 @@ function Report(props) {
                 <div className="col-12 col-md-8">
                     <div className="card shadow-sm border-0 rounded-lg mt-1">
                         {cardLoading && <img className="my-auto mx-auto" src={spinner} alt="loading" />}
-                        {(Object.keys(report).length  !== 0 && cardLoading === false) &&
+                        {(report !== undefined && report.length !== 0 && cardLoading === false) &&
                             <>
                                 <div className="card">
                                     <div className="card-header font-weight-bold text-center"><h2>{report.report_name}</h2></div>
                                     <ul className="list-group list-group-flush">
-                                        <li className="list-group-item"><span className="font-weight-bold">Report study:</span> {report.report_study}</li>
-                                        <li className="list-group-item"><span className="font-weight-bold">Status:</span> <span className="border badge badge badge-success">{report.report_status}</span></li>
+                                        <li className="list-group-item"><h5><span className="font-weight-bold">Report study:</span> {report.report_study}</h5></li>
+                                        <li className="list-group-item"><h5 className="font-weight-bold">Status: <span className="border badge badge badge-success">{report.report_status}</span>
+                                            <div className="btn-group float-right">
+                                                <button type="button" className="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Change status</button>
+                                                <div className="dropdown-menu dropdown-menu-right">
+                                                    <button className="dropdown-item" onClick={() => changeStatus("passed")} type="button">passed</button>
+                                                    <button className="dropdown-item" onClick={() => changeStatus("failed")} type="button">failed</button>
+                                                    <button className="dropdown-item" onClick={() => changeStatus("programming")} type="button">programming</button>
+                                                    <button className="dropdown-item" onClick={() => changeStatus("testing")} type="button">testing</button>
+                                                </div>
+                                            </div>
+                                            </h5>
+                                        </li>
                                     </ul>
                                 </div>
 
                                 {commentLoading && <img className="my-auto mx-auto" src={spinner} alt="loading" />}
 
                                 <div className="card-body mt-2">
-                                    {(Object.keys(comments).length !== 0 && cardLoading === false && commentLoading === false) &&
+                                    {(comments !== undefined && comments.length !== 0 && cardLoading === false && commentLoading === false) &&
                                         comments.data.map(comment => (
                                             <CommentCard key={comment.id} comment_author={comment.comment_author} comment_content={comment.comment_content} created_at={comment.created_at} />
                                         ))}
 
-                                    {(Object.keys(comments.data).length === 0 && comments !== undefined && cardLoading === false && commentLoading === false) && <h3 className="text-center mb-5"> There no comments </h3>}
+                                    {(comments === undefined && cardLoading === false && commentLoading === false) && <h3 className="text-center mb-5"> There no comments </h3>}
 
-                                    <Pagination comments={comments} searchComments={searchComments} />
+
+                                    {(comments !== undefined && cardLoading === false && commentLoading === false) && <Pagination comments={comments} searchComments={searchComments} />}
+
                                 </div>
                             </>
                         }
-                        {(Object.keys(report).length === 0 && report !== undefined && cardLoading === false) &&
+                        {(report !== undefined && report.length === 0 && cardLoading === false) &&
                             <>
                                 <div className="card shadow-lg border-0 rounded-lg mt-1">
                                     <h2 className="text-center font-weight-bold my-5">Report cannot be found</h2>

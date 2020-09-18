@@ -11,7 +11,7 @@ function ReportSummary({ comments, reports }) {
     useEffect(() => {
         setTimeout(() => {
             setLoading(false);
-        }, 1000);
+        }, 2000);
     }, []);
 
     return (

@@ -22,7 +22,7 @@ class ReportsTableSeeder extends Seeder
                 'report_study'=> $faker->company,
                 'comment_id'=> $faker->numberBetween($min = 1, $max = 10),
                 'study_id'=> $faker->numberBetween($min = 1, $max = 10),
-                'report_status'=> $faker->randomElement($array = array ('Passed','Failed','programming','testing')),
+                'report_status'=> $faker->randomElement($array = array ('passed','failed','programming','testing')),
             ]);
         }
     }
