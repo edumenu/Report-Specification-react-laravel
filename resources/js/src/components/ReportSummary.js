@@ -1,17 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import TableRow from './TableRow';
+import { observer, inject } from "mobx-react";
 import PropTypes from 'prop-types';
 import spinner from '../assests/images/spinner.gif';
 import { indexCounter } from '../utility/StudyUtility';
 
 
-function ReportSummary({ comments, reports }) {
+function ReportSummary(props) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         setTimeout(() => {
             setLoading(false);
         }, 2000);
+
+        props.RootStore.StudyStore.loadAllStudies();
+        props.RootStore.ReportStore.loadAllReports();
+        props.RootStore.CommentStore.loadAllComments();
+        props.RootStore.UserStore.loadAllUsers();
+
+        setTimeout(() => {
+            props.handleAllData();
+        }, 1500);
     }, []);
 
     return (
@@ -41,11 +51,11 @@ function ReportSummary({ comments, reports }) {
                                                 </td>
                                             </tr>}
 
-                                        {(Object.keys(reports).length !== 0 && loading === false) &&
-                                            reports.map((report, index) => (
+                                        {(Object.keys(props.reports).length !== 0 && loading === false) &&
+                                            props.reports.map((report, index) => (
                                                 <TableRow key={report.id} id={report.id} report_name={report.report_name}
                                                 study={report.report_study} status={report.report_status}
-                                                totalComments={indexCounter(comments, report.id, "commentsPerReportLength")} />
+                                                totalComments={indexCounter(props.comments, report.id, "commentsPerReportLength")} />
                                             ))}
                                     </tbody>
                                 </table>
@@ -58,9 +68,11 @@ function ReportSummary({ comments, reports }) {
     )
 }
 
-export default ReportSummary
+export default inject("RootStore")(observer(ReportSummary));
+
 
 ReportSummary.propTypes = {
     comments: PropTypes.array.isRequired,
-    reports: PropTypes.array.isRequired
+    reports: PropTypes.array.isRequired,
+    handleAllData: PropTypes.func.isRequired
 }

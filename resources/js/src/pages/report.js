@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { observer, inject } from "mobx-react";
 import spinner from '../assests/images/spinner.gif';
 import CommentCard from '../components/CommentCard';
-import { indexCounter } from '../utility/StudyUtility';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useParams } from 'react-router-dom';
 import Pagination from '../components/Pagination';
 
@@ -15,6 +16,12 @@ function Report(props) {
     const [cardLoading, setCarLoading] = useState(true);
     const [commentLoading, setCommentLoading] = useState(false);
     const params = useParams();
+    var statusColors = {
+        "passed": "badge-success",
+        "failed": "badge-danger",
+        "programming": "badge-warning",
+        "testing": "badge-info",
+    }
 
 
     useEffect(() => {
@@ -52,7 +59,7 @@ function Report(props) {
         setTimeout(() => {
             searchReport();
             setCommentLoading(false);
-        }, 1500);
+        }, 2000);
     }
 
     function onSubmit(e) {
@@ -62,8 +69,22 @@ function Report(props) {
         loadReportPage();
     }
 
-    function changeStatus(status){
-        console.log(status);
+    function updateStatus(id, status) {
+        props.RootStore.ReportStore.updateReportStatus(id, status);
+        loadReportPage();
+        setTimeout(() => {
+            if (props.RootStore.ReportStore.report.report_status === status) {
+                toast.success("success!", {
+                    autoClose: 3000,
+                    hideProgressBar: true
+                });
+            }else{
+                toast.error("Sorry, could not update status", {
+                    autoClose: 3000,
+                    hideProgressBar: true
+                });
+            }
+        }, 2500);
     }
 
     return (
@@ -100,18 +121,18 @@ function Report(props) {
                                     <div className="card-header font-weight-bold text-center"><h2>{report.report_name}</h2></div>
                                     <ul className="list-group list-group-flush">
                                         <li className="list-group-item"><h5><span className="font-weight-bold">Report study:</span> {report.report_study}</h5></li>
-                                        <li className="list-group-item"><h5 className="font-weight-bold">Status: <span className="border badge badge badge-success">{report.report_status}</span>
+                                        <li className="list-group-item"><h5 className="font-weight-bold">Status: <span className={`border badge badge ${statusColors[report.report_status]}`}>{report.report_status}</span>
                                             <div className="btn-group float-right">
                                                 <button type="button" className="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     Change status</button>
                                                 <div className="dropdown-menu dropdown-menu-right">
-                                                    <button className="dropdown-item" onClick={() => changeStatus("passed")} type="button">passed</button>
-                                                    <button className="dropdown-item" onClick={() => changeStatus("failed")} type="button">failed</button>
-                                                    <button className="dropdown-item" onClick={() => changeStatus("programming")} type="button">programming</button>
-                                                    <button className="dropdown-item" onClick={() => changeStatus("testing")} type="button">testing</button>
+                                                    <button className="dropdown-item" onClick={() => updateStatus(report.id, "passed")} type="button">passed</button>
+                                                    <button className="dropdown-item" onClick={() => updateStatus(report.id, "failed")} type="button">failed</button>
+                                                    <button className="dropdown-item" onClick={() => updateStatus(report.id, "programming")} type="button">programming</button>
+                                                    <button className="dropdown-item" onClick={() => updateStatus(report.id, "testing")} type="button">testing</button>
                                                 </div>
                                             </div>
-                                            </h5>
+                                        </h5>
                                         </li>
                                     </ul>
                                 </div>

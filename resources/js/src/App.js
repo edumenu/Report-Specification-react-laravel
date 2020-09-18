@@ -106,7 +106,7 @@ class App extends Component {
                 <WelcomeMessage loggedIn={loggedIn} user={user} />
                 <Switch>
                     <Route exact path="/">
-                        <Home studies={studies} reports={reports} comments={comments} />
+                        <Home studies={studies} reports={reports} comments={comments} handleAllData={this.handleAllData} />
                     </Route>
                     <Route path="/reports/:id">
                         <Report reports={reports} comments={comments} user={user}/>
@@ -118,7 +118,7 @@ class App extends Component {
                         {loggedIn === 'true' ? <Profile handleUserState={this.handleUserState} user={user} /> : <Redirect to="/" />}
                     </Route>
                     <Route path="/reportTable">
-                        {loggedIn === 'true' ? <ReportTable reports={reports} comments={comments} /> : <Redirect to="/" />}
+                        {loggedIn === 'true' ? <ReportTable reports={reports} comments={comments} handleAllData={this.handleAllData} /> : <Redirect to="/" />}
                     </Route>
                     <Route path="/login">
                         {loggedIn === 'false' ? <Login handleUserState={this.handleUserState} user={user} /> : <Redirect to="/dashboard" />}
