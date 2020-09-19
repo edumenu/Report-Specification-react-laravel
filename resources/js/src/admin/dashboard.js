@@ -37,7 +37,7 @@ export class dashboard extends Component {
 
     render() {
 
-        const { user, users, studies, reports, comments } = this.state
+        const { users, studies, reports } = this.state
 
         return (
             <div className="container-fluid dashboardCard text-blue">

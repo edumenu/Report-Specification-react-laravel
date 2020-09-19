@@ -15,10 +15,11 @@ class StudiesTableSeeder extends Seeder
         Study::truncate();
 
         $faker = \Faker\Factory::create();
+        $array = array ('CDK9', 'QED PROPEL 001', 'QED PROPEL 002', 'Acerta', 'Alucent');
 
         for($i = 0; $i < 5; $i++){
             Study::create([
-                'study_name'=> $faker->randomElement($array = array ('CDK9', 'QED PROPEL 001', 'QED PROPEL 002', 'Acerta', 'Alucent')),
+                'study_name'=> $array[$i],
             ]);
         }
     }

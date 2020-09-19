@@ -67,7 +67,7 @@ class CommentStore {
             report_id: id,
         })
             .then(response => {
-                console.log(response);
+                // console.log(response);
             }).catch(error => {
                 console.log(error);
             });

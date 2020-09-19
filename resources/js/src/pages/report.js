@@ -99,11 +99,11 @@ function Report(props) {
                                 <div className="row">
                                     <div className="col">
                                         <label htmlFor="inputEmail4">Name</label>
-                                        <input className="form-control" value={userName} onChange={(e) => setUserName(e.target.value)} />
+                                        <input className="form-control" value={userName} onChange={(e) => setUserName(e.target.value)} placeholder="Enter your name" />
                                     </div>
                                     <div className="col">
                                         <label htmlFor="inputEmail4">Comment</label>
-                                        <input type="text" className="form-control" value={userComment} onChange={(e) => setUserComment(e.target.value)} />
+                                        <input type="text" className="form-control" value={userComment} onChange={(e) => setUserComment(e.target.value)} placeholder="Enter comment" />
                                     </div>
                                 </div>
                                 <div className="mb-4 text-center">

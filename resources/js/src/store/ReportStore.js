@@ -44,6 +44,28 @@ class ReportStore {
             });
     }
 
+    loadReportByStudy = async (study) => {
+        axios.get(`http://127.0.0.1:8000/api/reports/${study}`).then(response => {
+            runInAction(() => {
+                this.reports = response.data
+            });
+        })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    AddReport = async (study) => {
+        axios.post(`http://127.0.0.1:8000/api/reports/${study}`).then(response => {
+            runInAction(() => {
+                this.reports = response.data
+            });
+        })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
 
 
 }

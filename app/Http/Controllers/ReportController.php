@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Report;
 use Composer\XdebugHandler\Status;
+use Illuminate\Support\Facades\Validator;
+
 
 class ReportController extends Controller
 {
@@ -27,7 +29,26 @@ class ReportController extends Controller
 
     public function store(Request $request)
     {
-        return Report::create($request->all());
+        // return Report::create($request->all());
+
+        $rules = array(
+            'report_name' => 'required',
+            'report_study' => 'required',
+        );
+
+        $credentials = $request->only('report_name', 'report_study');
+
+        $validator = Validator::make($credentials, $rules);
+
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return response()->json([
+                'reportErrorMessage' => $errors->first('report_name'),
+                'studyErrorMessage' => $errors->first('report_study'),
+            ], 401);
+        } else {
+            return Report::create($request->all());
+        }
     }
 
     public function update(Request $request, Report $report)

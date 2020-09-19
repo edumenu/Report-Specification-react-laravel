@@ -9,6 +9,7 @@ import ReportTable from './admin/ReportTable';
 import WelcomeMessage from './components/WelcomeMessage';
 import Dashboard from './admin/dashboard';
 import Profile from './admin/Profile';
+import AddReport from './admin/AddReport';
 import Navbar from './components/Navbar';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
@@ -116,6 +117,9 @@ class App extends Component {
                     </Route>
                     <Route path="/profile">
                         {loggedIn === 'true' ? <Profile handleUserState={this.handleUserState} user={user} /> : <Redirect to="/" />}
+                    </Route>
+                    <Route path="/addReport">
+                        {loggedIn === 'true' ? <AddReport studies={studies} /> : <Redirect to="/" />}
                     </Route>
                     <Route path="/reportTable">
                         {loggedIn === 'true' ? <ReportTable reports={reports} comments={comments} handleAllData={this.handleAllData} /> : <Redirect to="/" />}

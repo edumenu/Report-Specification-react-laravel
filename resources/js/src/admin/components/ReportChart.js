@@ -1,14 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer} from 'recharts';
 import { curveCardinal } from 'd3-shape';
 import { indexCounter } from '../../utility/StudyUtility';
 
 function ReportChart(props) {
-
-    useEffect(() => {
-        console.log(indexCounter(props.reports, "Passed", "numberOfStatus"));
-    })
-
     const data = [
         {
             name: 'Passed', uv: indexCounter(props.reports, "passed", "numberOfStatus")

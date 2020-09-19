@@ -54,7 +54,7 @@ function Profile({ handleUserState, user }) {
     };
 
     return (
-        <div className="container text-blue">
+        <div className="container text-blue centerCards">
             <div className="row justify-content-center">
                 <div className="col-lg-5">
                     <div className="card shadow-lg border-0 rounded-lg mt-1">
