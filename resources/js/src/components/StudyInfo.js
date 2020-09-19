@@ -20,8 +20,8 @@ function StudyInfo({ studies, reports }) {
                 <div className="list-group list-group-flush">
                     {loading && <img className="my-auto mx-auto" src={spinner} alt="loading" />}
                     {/* Print first line (All studies) */}
-                    {(Object.keys(studies).length !== 0 && studies !== undefined && loading === false) && <div><a href="#" className="list-group-item list-group-item-action">
-                        All Studies<span className="badge badge-primary badge-pill float-right">{ reports.length }</span></a></div>}
+                    {(Object.keys(studies).length !== 0 && studies !== undefined && loading === false) && <div><button className="list-group-item list-group-item-action">
+                        All Studies<span className="badge badge-primary badge-pill float-right">{ reports.length }</span></button></div>}
 
                     {(Object.keys(studies).length !== 0 && studies !== undefined && loading === false) &&
                         studies.map((study, index) => (

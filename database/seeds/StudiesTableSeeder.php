@@ -18,7 +18,7 @@ class StudiesTableSeeder extends Seeder
 
         for($i = 0; $i < 5; $i++){
             Study::create([
-                'study_name'=> $faker->company,
+                'study_name'=> $faker->randomElement($array = array ('CDK9', 'QED PROPEL 001', 'QED PROPEL 002', 'Acerta', 'Alucent')),
             ]);
         }
     }

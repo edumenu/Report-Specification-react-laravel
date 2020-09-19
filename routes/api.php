@@ -30,7 +30,8 @@ Route::put('/user/{id}','UserController@updateUser');
 
 // Reports
 Route::get('reports','ReportController@index');
-Route::get('reports/{report}','ReportController@show');
+Route::get('report/{report}','ReportController@show');
+Route::get('reports/{study}','ReportController@showPerStudy');
 Route::post('reports','ReportController@store');
 Route::put('reports/{report}','ReportController@update');
 Route::put('reports/{id}/{status}','ReportController@updateStatus');

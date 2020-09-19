@@ -78,7 +78,7 @@ function Report(props) {
                     autoClose: 3000,
                     hideProgressBar: true
                 });
-            }else{
+            } else {
                 toast.error("Sorry, could not update status", {
                     autoClose: 3000,
                     hideProgressBar: true
@@ -96,14 +96,16 @@ function Report(props) {
                         <div className="card-body">
                             <p>Add a comment to the report so a programmer can review it</p>
                             <form onSubmit={onSubmit}>
-                                <label>
-                                    Name:
-                                    <input className="form-control" value={userName} onChange={(e) => setUserName(e.target.value)} />
-                                </label>
-                                <label>
-                                    Comment:
-                                    <input className="form-control" value={userComment} onChange={(e) => setUserComment(e.target.value)} />
-                                </label>
+                                <div className="row">
+                                    <div className="col">
+                                        <label htmlFor="inputEmail4">Name</label>
+                                        <input className="form-control" value={userName} onChange={(e) => setUserName(e.target.value)} />
+                                    </div>
+                                    <div className="col">
+                                        <label htmlFor="inputEmail4">Comment</label>
+                                        <input type="text" className="form-control" value={userComment} onChange={(e) => setUserComment(e.target.value)} />
+                                    </div>
+                                </div>
                                 <div className="mb-4 text-center">
                                     <button className="btn btn-success text-center mt-5" type="submit"> Add comment </button>
                                 </div>

@@ -19,7 +19,7 @@ class ReportsTableSeeder extends Seeder
         for($i = 0; $i < 50; $i++){
             Report::create([
                 'report_name'=> $faker->company,
-                'report_study'=> $faker->company,
+                'report_study'=> $faker->randomElement($array = array ('CDK9', 'QED PROPEL 001', 'QED PROPEL 002', 'Acerta', 'Alucent')),
                 'comment_id'=> $faker->numberBetween($min = 1, $max = 10),
                 'study_id'=> $faker->numberBetween($min = 1, $max = 10),
                 'report_status'=> $faker->randomElement($array = array ('passed','failed','programming','testing')),

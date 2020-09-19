@@ -21,7 +21,7 @@ class ReportStore {
     }
 
     loadOneReport = async (id) => {
-        axios.get(`http://127.0.0.1:8000/api/reports/${id}`).then(response => {
+        axios.get(`http://127.0.0.1:8000/api/report/${id}`).then(response => {
             // console.log(response.data);
             runInAction(() => {
                 this.report = response.data

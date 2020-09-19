@@ -1,12 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { indexCounter } from '../../utility/StudyUtility';
 
 function CardSummary(props) {
-
-    useEffect(() => {
-        // console.log(props);
-    });
-
     return (
         <>
             <ol className="breadcrumb">

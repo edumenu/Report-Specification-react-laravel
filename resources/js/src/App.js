@@ -35,7 +35,7 @@ class App extends Component {
 
         setTimeout(() => {
             this.handleAllData();
-        }, 1500);
+        }, 2000);
     }
 
     handleAllData = () => {

@@ -10,7 +10,7 @@ function Home(props) {
                 <li className="breadcrumb-item active" aria-current="page"><h4>Home</h4></li>
             </ol> */}
             <div className="row">
-                <div className="col-12 col-md-4"> <StudyInfo studies={props.studies} reports={props.reports} /> </div>
+                <div className="col-12 col-md-4"> <StudyInfo studies={props.studies} reports={props.reports} handleAllData={props.handleAllData}  /> </div>
                 <div className="col-12 col-md-8"> <ReportSummary comments={props.comments} reports={props.reports} handleAllData={props.handleAllData} />  </div>
             </div>
         </div>

@@ -18,6 +18,13 @@ class ReportController extends Controller
         return Report::find($id);
     }
 
+    public function showPerStudy($study)
+    {
+        $reports = Report::where('report_study', $study)->get();
+
+        return response()->json($reports, 200);
+    }
+
     public function store(Request $request)
     {
         return Report::create($request->all());

@@ -5,7 +5,7 @@ function StudyList({ id, study, totalReport }) {
     return (
         <div>
             {
-                <a href="#" className="list-group-item list-group-item-action">{study}<span className="badge badge-primary badge-pill float-right">{totalReport}</span></a>
+                <button className="list-group-item list-group-item-action">{study}<span className="badge badge-primary badge-pill float-right">{totalReport}</span></button>
             }
         </div>
     )
