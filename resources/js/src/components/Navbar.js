@@ -38,6 +38,10 @@ function Navbar({ handleLogout, loggedIn, user }) {
                             </li>
 
                             <li className="nav-item">
+                                <Link to="/addStudy" className="nav-link">Add Study</Link>
+                            </li>
+
+                            <li className="nav-item">
                                 <Link to="/addReport" className="nav-link">Add Report</Link>
                             </li>
                         </ul>

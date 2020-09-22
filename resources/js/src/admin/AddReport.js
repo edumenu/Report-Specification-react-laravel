@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import ErrorMessage from '../components/ErrorMessage';
-import { observer, inject } from "mobx-react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -9,6 +9,7 @@ function AddReport(props) {
     const [studyName, setStudyName] = useState('CDK9');
     const [nameError, setNameError] = useState('');
     const [studyNameError, setStudyNameError] = useState('');
+    let history = useHistory();
 
     function onSubmit(e) {
         e.preventDefault();
@@ -35,6 +36,7 @@ function AddReport(props) {
                             autoClose: 3000,
                             hideProgressBar: true
                         });
+                        history.push("/");
                     })
                     .catch(error => {
                         setNameError(error.response.data.reportErrorMessage);

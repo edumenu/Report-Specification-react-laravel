@@ -30,15 +30,16 @@ function StudyInfo(props) {
     return (
         <div className="card shadow-sm text-blue">
             <h5 className="card-header font-weight-bold">Select a Study to view reports</h5>
-            <div className="card-body text-dark">
+            <div className="card-body text-dark studyInfo">
                 <div className="list-group list-group-flush">
                     {loading && <img className="my-auto mx-auto" src={spinner} alt="loading" />}
                     {/* Print first line (All studies) */}
                     {(Object.keys(props.studies).length !== 0 && props.studies !== undefined && loading === false) && <div><button onClick={loadAllReports} className="list-group-item list-group-item-action">
-                        All props.Studies<span className="badge badge-primary badge-pill float-right">{props.reports.length}</span></button></div>}
+                        All Studies<span className="badge badge-primary badge-pill float-right">{props.reports.length}</span></button></div>}
 
                     {(Object.keys(props.studies).length !== 0 && props.studies !== undefined && loading === false) &&
                         props.studies.map((study, index) => (
+                            // console.log(study.id)
                             <button key={study.id} className="list-group-item list-group-item-action" onClick={() => loadSelectedReport(study.study_name)}>{study.study_name}<span className="badge badge-primary badge-pill float-right">{indexCounter(props.reports, study.id, "reportsPerStudy")}</span></button>
                         ))}
                     {(Object.keys(props.studies).length == 0 && props.studies !== undefined && loading === false) && <h4>There are no studies</h4>}

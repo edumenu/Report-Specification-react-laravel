@@ -61,3 +61,8 @@ tbody {
       margin: auto;
       padding-top: auto;
   }
+
+  .studyInfo {
+    height:60vh;
+    overflow: scroll;
+  }
