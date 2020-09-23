@@ -6,7 +6,7 @@ class UserStore {
     users = {};
 
     loadAllUsers = async () => {
-        axios.get("http://127.0.0.1:8000/api/users").then(response => {
+        axios.get("/api/users").then(response => {
             runInAction(() => {
                 this.users = response.data;
             });

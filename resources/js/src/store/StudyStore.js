@@ -6,7 +6,7 @@ class StudyStore {
     studies = {};
 
     loadAllStudies = async () => {
-        axios.get("http://127.0.0.1:8000/api/studies").then(response => {
+        axios.get("/api/studies").then(response => {
             runInAction(() =>{
                 this.studies = response.data;
             });
