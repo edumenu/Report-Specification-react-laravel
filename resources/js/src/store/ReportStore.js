@@ -6,6 +6,7 @@ configure({ enforceActions: "observed" });  // don't allow state modifications o
 
 class ReportStore {
     reports = {};
+    reportsByStudy = {};
     report = {};
     reportSuccess = false
 
@@ -13,6 +14,7 @@ class ReportStore {
         axios.get("/api/reports").then(response => {
             runInAction(() => {
                 this.reports = response.data
+                this.reportsByStudy = response.data
             });
         })
             .catch(err => {
@@ -47,7 +49,7 @@ class ReportStore {
     loadReportByStudy = async (study) => {
         axios.get(`/api/reports/${study}`).then(response => {
             runInAction(() => {
-                this.reports = response.data
+                this.reportsByStudy = response.data
             });
         })
             .catch(err => {

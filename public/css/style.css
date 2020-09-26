@@ -26,7 +26,7 @@ th, td {
 
 tbody {
     display: block;
-    height: 60vmin;
+    height: 46vmin;
     overflow: auto;
 }
 
@@ -48,7 +48,7 @@ tbody {
   }
 
   .centerCards{
-    margin-top: 5%;
+    margin-top: 3%;
   }
 
   .dashboardCard{
@@ -66,3 +66,8 @@ tbody {
     height:60vh;
     overflow: scroll;
   }
+
+  .studyCardScroll{
+    overflow-x: auto;
+    white-space: nowrap;
+}

@@ -29,22 +29,18 @@ function StudyInfo(props) {
 
     return (
         <div className="card shadow-sm text-blue">
-            <h5 className="card-header font-weight-bold">Select a Study to view reports</h5>
-            <div className="card-body text-dark studyInfo">
-                <div className="list-group list-group-flush">
-                    {loading && <img className="my-auto mx-auto" src={spinner} alt="loading" />}
-                    {/* Print first line (All studies) */}
-                    {(Object.keys(props.studies).length !== 0 && props.studies !== undefined && loading === false) && <div><button onClick={loadAllReports} className="list-group-item list-group-item-action">
-                        All Studies<span className="badge badge-primary badge-pill float-right">{props.reports.length}</span></button></div>}
+            <h5 className="card-header font-weight-bold text-center">Select a Study to view reports</h5>
+            {loading && <img className="my-auto mx-auto" src={spinner} alt="loading" />}
 
-                    {(Object.keys(props.studies).length !== 0 && props.studies !== undefined && loading === false) &&
-                        props.studies.map((study, index) => (
-                            // console.log(study.id)
-                            <button key={study.id} className="list-group-item list-group-item-action" onClick={() => loadSelectedReport(study.study_name)}>{study.study_name}<span className="badge badge-primary badge-pill float-right">{indexCounter(props.reports, study.id, "reportsPerStudy")}</span></button>
-                        ))}
-                    {(Object.keys(props.studies).length == 0 && props.studies !== undefined && loading === false) && <h4>There are no studies</h4>}
-                </div>
+            <div class="d-flex flex-row flex-nowrap studyCardScroll">
+                {(Object.keys(props.studies).length !== 0 && props.studies !== undefined && loading === false) && <div onClick={loadAllReports} class="card card-body shadow-sm text-blue"><h5 class="card-title text-center">All Studies</h5><button className="btn btn-outline-info stretched-link">{props.reports.length}</button></div>}
+
+                {(Object.keys(props.studies).length !== 0 && props.studies !== undefined && loading === false) &&
+                    props.studies.map((study, index) => (
+                        <div key={study.id} class="card card-body shadow-sm text-blue" onClick={() => loadSelectedReport(study.study_name)}><h5 class="card-title text-center">{study.study_name}</h5><button className="btn btn-outline-info stretched-link">{indexCounter(props.reports, study.id, "reportsPerStudy")}</button></div>
+                    ))}
             </div>
+            {(Object.keys(props.studies).length == 0 && props.studies !== undefined && loading === false) && <h4>There are no studies</h4>}
         </div>
     )
 }

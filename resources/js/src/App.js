@@ -25,6 +25,7 @@ class App extends Component {
         users: {},
         studies: [],
         reports: [],
+        reportsByStudy: [],
         comments: [],
     }
 
@@ -44,6 +45,7 @@ class App extends Component {
         this.setState({
             studies: this.props.RootStore.StudyStore.studies,
             reports: this.props.RootStore.ReportStore.reports,
+            reportsByStudy: this.props.RootStore.ReportStore.reportsByStudy,
             comments: this.props.RootStore.CommentStore.comments,
             users: this.props.RootStore.UserStore.users,
         });
@@ -99,7 +101,7 @@ class App extends Component {
 
 
     render() {
-        const { loggedIn, user, users, studies, reports, comments } = this.state;
+        const { loggedIn, user, users, studies, reports, reportsByStudy, comments } = this.state;
 
         return (
             <Router>
@@ -108,7 +110,7 @@ class App extends Component {
                 <WelcomeMessage loggedIn={loggedIn} user={user} />
                 <Switch>
                     <Route exact path="/">
-                        <Home studies={studies} reports={reports} comments={comments} handleAllData={this.handleAllData} />
+                        <Home studies={studies} reports={reports} reportsByStudy={reportsByStudy} comments={comments} handleAllData={this.handleAllData} />
                     </Route>
                     <Route path="/reports/:id">
                         <Report reports={reports} comments={comments} user={user}/>

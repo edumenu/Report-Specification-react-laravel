@@ -41,7 +41,7 @@ export class dashboard extends Component {
 
         return (
             <div className="container-fluid dashboardCard text-blue">
-                <CardSummary users={users} reports={reports} studies={studies}/>
+                <CardSummary users={users} reports={reports} studies={studies} />
                 <div className="row mt-1">
                     <div className="col-12 col-md-6"> <ReportChart reports={reports} /></div>
 

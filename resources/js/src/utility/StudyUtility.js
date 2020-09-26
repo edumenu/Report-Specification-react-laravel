@@ -2,17 +2,23 @@ export const indexCounter = (objArr, index, type) => {
     if (objArr.length === undefined) return 0;
     switch(type){
         case "reportsPerStudy":
-            return objArr.filter(item => item.study_id === index).length;
+            const reportsPerStudy = objArr.filter(item => item.study_id === index);
+            return reportsPerStudy.length;
         case "commentsPerReportLength":
-            return objArr.filter(item => item.report_id === index).length;
+            const commentsPerReportLength = objArr.filter(item => item.report_id === index);
+            return commentsPerReportLength.length;
         case "oneReport":
-            return objArr.filter(item => item.id === index);
+            const oneReport = objArr.filter(item => item.id === index);
+            return oneReport;
         case "commentsPerReport":
-            return objArr.filter(item => item.report_id === index);
+            const commentsPerReport = objArr.filter(item => item.report_id === index);
+            return commentsPerReport;
         case "numberOfUsers":
-            return objArr.filter(item => item.role === index).length;
+            const numberOfUsers = objArr.filter(item => item.role === index);
+            return numberOfUsers.length;
         case "numberOfStatus":
-            return objArr.filter(item => item.report_status === index).length;
+            const numberOfStatus = objArr.filter(item => item.report_status === index);
+            return numberOfStatus.length;
         default:
             return 0;
     }

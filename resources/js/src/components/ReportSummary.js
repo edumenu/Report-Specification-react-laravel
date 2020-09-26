@@ -51,8 +51,8 @@ function ReportSummary(props) {
                                                 </td>
                                             </tr>}
 
-                                        {(Object.keys(props.reports).length !== 0 && loading === false) &&
-                                            props.reports.map((report, index) => (
+                                        {(Object.keys(props.reportsByStudy).length !== 0 && loading === false) &&
+                                            props.reportsByStudy.map((report, index) => (
                                                 <TableRow key={report.id} id={report.id} report_name={report.report_name}
                                                 study={report.report_study} status={report.report_status}
                                                 totalComments={indexCounter(props.comments, report.id, "commentsPerReportLength")} />
