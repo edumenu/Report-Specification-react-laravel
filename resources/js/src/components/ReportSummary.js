@@ -30,7 +30,7 @@ function ReportSummary(props) {
                 <div className="col-lg-12">
                     <div className="card shadow-sm rounded-lg mt-1">
                         <div className="table-responsive-xl tableScroll ">
-                            <h4 className="card-header font-weight-bold">Report Table</h4>
+                            <h4 className="card-header font-weight-bold text-center">Report Table</h4>
                             <div className="table-responsive">
                                 <table className="table table-hover">
                                     <thead>

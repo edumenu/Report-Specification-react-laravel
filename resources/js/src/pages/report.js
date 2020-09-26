@@ -67,6 +67,8 @@ function Report(props) {
         let user_id = Object.keys(props.user).length === 0 ? 0 : props.user.id;
         props.RootStore.CommentStore.addComment(userName, userComment, user_id, params.id);
         loadReportPage();
+        setUserName('');
+        setUserComment('');
     }
 
     function updateStatus(id, status) {

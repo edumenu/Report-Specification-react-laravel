@@ -4,9 +4,10 @@ configure({ enforceActions: "observed" });  // don't allow state modifications o
 
 class UserStore {
     users = {};
+    environ =  process.env.NODE_ENV === "production" ? "/projects/ReportSpecification/public" : "";
 
     loadAllUsers = async () => {
-        axios.get("/api/users").then(response => {
+        axios.get(`${this.environ}/api/users`).then(response => {
             runInAction(() => {
                 this.users = response.data;
             });

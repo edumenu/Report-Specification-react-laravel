@@ -7,15 +7,20 @@ function Navbar({ handleLogout, loggedIn, user }) {
     let history = useHistory();
 
     async function userLogout() {
-        axios.get('/api/logout').then(response => {
-            localStorage.setItem('loggedIn', 'false');
-            handleLogout();
-            history.push("/");
-            toast.error(response.data.message, {
-                autoClose: 3000,
-                hideProgressBar: true
+        let environ =  process.env.NODE_ENV === "production" ? "/projects/ReportSpecification/public" : "";
+        try{
+            axios.get(`${environ}/api/logout`).then(response => {
+                localStorage.setItem('loggedIn', 'false');
+                handleLogout();
+                history.push("/");
+                toast.error(response.data.message, {
+                    autoClose: 3000,
+                    hideProgressBar: true
+                });
             });
-        });
+        } catch (err){
+            console.log(err);
+        }
     };
 
     const navBarStyle = {

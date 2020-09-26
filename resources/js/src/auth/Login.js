@@ -17,15 +17,16 @@ function Login({ handleUserState, user }) {
     }
 
     async function userLogin(email, password) {
+        let environ =  process.env.NODE_ENV === "production" ? "/projects/ReportSpecification/public" : "";
         try {
-            axios.get('/sanctum/csrf-cookie').then(response => {
-                axios.post('/api/login',
+            axios.get(`${environ}/sanctum/csrf-cookie`).then(response => {
+                axios.post(`${environ}/api/login`,
                     {
                         email,
                         password
                     })
                     .then(res => {
-                        axios.get("/api/user").then(response => {
+                        axios.get(`${environ}/api/user`).then(response => {
                             localStorage.setItem('loggedIn', 'true');
                             handleUserState(response.data);
                             history.push("/dashboard");

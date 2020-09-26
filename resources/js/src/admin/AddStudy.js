@@ -15,6 +15,8 @@ function AddStudy(props) {
     }
 
     async function AddStudy(studyName) {
+        let environ =  process.env.NODE_ENV === "production" ? "/projects/ReportSpecification/public" : "";
+
         try {
             const studyObj = {
                 study_name: studyName
@@ -24,8 +26,8 @@ function AddStudy(props) {
                 headers: { 'Content-Type': 'application/json' }
             }
 
-            axios.get('/sanctum/csrf-cookie').then(response => {
-                axios.post(`http://127.0.0.1:8000/api/studies`, studyObj, config)
+            axios.get(`${environ}/sanctum/csrf-cookie`).then(response => {
+                axios.post(`${environ}/api/studies`, studyObj, config)
                     .then(res => {
                         toast.success(`${studyName} was successfully created!`, {
                             autoClose: 3000,

@@ -8,10 +8,12 @@ class ReportStore {
     reports = {};
     reportsByStudy = {};
     report = {};
-    reportSuccess = false
+    reportSuccess = false;
+    environ =  process.env.NODE_ENV === "production" ? "/projects/ReportSpecification/public" : "";
+
 
     loadAllReports = async () => {
-        axios.get("/api/reports").then(response => {
+        axios.get(`${this.environ}/api/reports`).then(response => {
             runInAction(() => {
                 this.reports = response.data
                 this.reportsByStudy = response.data
@@ -23,7 +25,7 @@ class ReportStore {
     }
 
     loadOneReport = async (id) => {
-        axios.get(`/api/report/${id}`).then(response => {
+        axios.get(`${this.environ}/api/report/${id}`).then(response => {
             // console.log(response.data);
             runInAction(() => {
                 this.report = response.data
@@ -35,7 +37,7 @@ class ReportStore {
     }
 
     updateReportStatus = async (id, status) => {
-        axios.put(`/api/reports/${id}/${status}`).then(response => {
+        axios.put(`${this.environ}/api/reports/${id}/${status}`).then(response => {
             runInAction(() => {
                 this.report = response.data
                 this.reportSuccess = true
@@ -47,7 +49,7 @@ class ReportStore {
     }
 
     loadReportByStudy = async (study) => {
-        axios.get(`/api/reports/${study}`).then(response => {
+        axios.get(`${this.environ}/api/reports/${study}`).then(response => {
             runInAction(() => {
                 this.reportsByStudy = response.data
             });
@@ -58,7 +60,7 @@ class ReportStore {
     }
 
     AddReport = async (study) => {
-        axios.post(`/api/reports/${study}`).then(response => {
+        axios.post(`${this.environ}/api/reports/${study}`).then(response => {
             runInAction(() => {
                 this.reports = response.data
             });

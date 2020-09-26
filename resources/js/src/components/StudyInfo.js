@@ -32,15 +32,15 @@ function StudyInfo(props) {
             <h5 className="card-header font-weight-bold text-center">Select a Study to view reports</h5>
             {loading && <img className="my-auto mx-auto" src={spinner} alt="loading" />}
 
-            <div class="d-flex flex-row flex-nowrap studyCardScroll">
-                {(Object.keys(props.studies).length !== 0 && props.studies !== undefined && loading === false) && <div onClick={loadAllReports} class="card card-body shadow-sm text-blue"><h5 class="card-title text-center">All Studies</h5><button className="btn btn-outline-info stretched-link">{props.reports.length}</button></div>}
+            <div className="d-flex flex-row flex-nowrap studyCardScroll">
+                {(Object.keys(props.studies).length !== 0 && props.studies !== undefined && loading === false) && <div onClick={loadAllReports} className="card card-body shadow-sm text-blue"><h5 className="card-title text-center">All Studies</h5><button className="btn btn-outline-info stretched-link">{props.reports.length}</button></div>}
 
                 {(Object.keys(props.studies).length !== 0 && props.studies !== undefined && loading === false) &&
                     props.studies.map((study, index) => (
-                        <div key={study.id} class="card card-body shadow-sm text-blue" onClick={() => loadSelectedReport(study.study_name)}><h5 class="card-title text-center">{study.study_name}</h5><button className="btn btn-outline-info stretched-link">{indexCounter(props.reports, study.id, "reportsPerStudy")}</button></div>
+                        <div key={study.id} className="card card-body shadow-sm text-blue" onClick={() => loadSelectedReport(study.study_name)}><h5 className="card-title text-center">{study.study_name}</h5><button className="btn btn-outline-info stretched-link">{indexCounter(props.reports, study.id, "reportsPerStudy")}</button></div>
                     ))}
             </div>
-            {(Object.keys(props.studies).length == 0 && props.studies !== undefined && loading === false) && <h4>There are no studies</h4>}
+            {(Object.keys(props.studies).length == 0 && props.studies !== undefined && loading === false) && <h4 className="text-center">There are no studies</h4>}
         </div>
     )
 }

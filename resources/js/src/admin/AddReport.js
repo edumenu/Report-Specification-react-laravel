@@ -17,6 +17,7 @@ function AddReport(props) {
     }
 
     async function AddReport(reportName) {
+        let environ =  process.env.NODE_ENV === "production" ? "/projects/ReportSpecification/public" : "";
         try {
             const reportObj = {
                 report_name: reportName,
@@ -29,8 +30,8 @@ function AddReport(props) {
                 headers: { 'Content-Type': 'application/json' }
             }
 
-            axios.get('/sanctum/csrf-cookie').then(response => {
-                axios.post(`http://127.0.0.1:8000/api/reports`, reportObj, config)
+            axios.get(`${environ}/sanctum/csrf-cookie`).then(response => {
+                axios.post(`${environ}/api/reports`, reportObj, config)
                     .then(res => {
                         toast.success(`${reportName} was successfully created!`, {
                             autoClose: 3000,
