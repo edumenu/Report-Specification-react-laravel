@@ -9,7 +9,7 @@ function Navbar({ handleLogout, loggedIn, user }) {
     async function userLogout() {
         let environ =  process.env.NODE_ENV === "production" ? "/projects/ReportSpecification/public" : "";
         try{
-            axios.get(`${environ}/api/logout`).then(response => {
+            axios.get(`/api/logout`).then(response => {
                 localStorage.setItem('loggedIn', 'false');
                 handleLogout();
                 history.push("/");

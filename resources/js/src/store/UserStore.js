@@ -7,7 +7,7 @@ class UserStore {
     environ =  process.env.NODE_ENV === "production" ? "/projects/ReportSpecification/public" : "";
 
     loadAllUsers = async () => {
-        axios.get(`${this.environ}/api/users`).then(response => {
+        axios.get(`/api/users`).then(response => {
             runInAction(() => {
                 this.users = response.data;
             });

@@ -21,8 +21,8 @@ function Profile({ handleUserState, user }) {
     async function userUpdate(name, email, role, password) {
         let environ =  process.env.NODE_ENV === "production" ? "/projects/ReportSpecification/public" : "";
         try {
-            axios.get(`${environ}/sanctum/csrf-cookie`).then(response => {
-                axios.put(`${environ}/api/user/${user.id}`,
+            axios.get(`/sanctum/csrf-cookie`).then(response => {
+                axios.put(`/api/user/${user.id}`,
                     {
                         name,
                         email,
@@ -30,7 +30,7 @@ function Profile({ handleUserState, user }) {
                         password
                     })
                     .then(res => {
-                        axios.get(`${environ}/api/user`).then(response => {
+                        axios.get(`/api/user`).then(response => {
                             handleUserState(response.data);
                             toast.success(res.data.message, {
                                 autoClose: 3000,

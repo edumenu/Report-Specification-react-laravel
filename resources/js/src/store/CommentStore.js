@@ -11,7 +11,7 @@ class CommentStore {
 
 
     loadAllComments = async () => {
-        axios.get(`${this.environ}/api/comments`).then(response => {
+        axios.get(`/api/comments`).then(response => {
             runInAction(() => {
                 this.comments = response.data;
             });
@@ -36,7 +36,7 @@ class CommentStore {
 
 
             case "pageSelect":
-                axios.get(`${this.environ}/api/comments/${id}?page=${pageNum}`).then(response => {
+                axios.get(`/api/comments/${id}?page=${pageNum}`).then(response => {
                     runInAction(() => {
                         this.commentsPerReports = response.data
                     });
@@ -47,7 +47,7 @@ class CommentStore {
                 break;
 
             default:
-                axios.get(`${this.environ}/api/comments/${id}`).then(response => {
+                axios.get(`/api/comments/${id}`).then(response => {
                     runInAction(() => {
                         this.commentsPerReports = response.data
                     });
@@ -62,7 +62,7 @@ class CommentStore {
     }
 
     addComment = async (userName, userComment, user_id, id) => {
-        axios.post(`${this.environ}/api/comments`, {
+        axios.post(`/api/comments`, {
             comment_author: userName,
             comment_content: userComment,
             user_id: user_id,

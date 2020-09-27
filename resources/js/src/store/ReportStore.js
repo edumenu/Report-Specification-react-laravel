@@ -13,7 +13,7 @@ class ReportStore {
 
 
     loadAllReports = async () => {
-        axios.get(`${this.environ}/api/reports`).then(response => {
+        axios.get(`/api/reports`).then(response => {
             runInAction(() => {
                 this.reports = response.data
                 this.reportsByStudy = response.data
@@ -25,7 +25,7 @@ class ReportStore {
     }
 
     loadOneReport = async (id) => {
-        axios.get(`${this.environ}/api/report/${id}`).then(response => {
+        axios.get(`/api/report/${id}`).then(response => {
             // console.log(response.data);
             runInAction(() => {
                 this.report = response.data
@@ -37,7 +37,7 @@ class ReportStore {
     }
 
     updateReportStatus = async (id, status) => {
-        axios.put(`${this.environ}/api/reports/${id}/${status}`).then(response => {
+        axios.put(`/api/reports/${id}/${status}`).then(response => {
             runInAction(() => {
                 this.report = response.data
                 this.reportSuccess = true
@@ -49,7 +49,7 @@ class ReportStore {
     }
 
     loadReportByStudy = async (study) => {
-        axios.get(`${this.environ}/api/reports/${study}`).then(response => {
+        axios.get(`/api/reports/${study}`).then(response => {
             runInAction(() => {
                 this.reportsByStudy = response.data
             });
@@ -60,7 +60,7 @@ class ReportStore {
     }
 
     AddReport = async (study) => {
-        axios.post(`${this.environ}/api/reports/${study}`).then(response => {
+        axios.post(`/api/reports/${study}`).then(response => {
             runInAction(() => {
                 this.reports = response.data
             });

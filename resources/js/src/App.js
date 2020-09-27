@@ -74,8 +74,8 @@ class App extends Component {
     async findUser() {
         let environ =  process.env.NODE_ENV === "production" ? "/projects/ReportSpecification/public" : "";
         try {
-            axios.get(`${environ}/sanctum/csrf-cookie`).then(response => {
-                axios.get(`${environ}/api/user`).then(response => {
+            axios.get(`/sanctum/csrf-cookie`).then(response => {
+                axios.get(`/api/user`).then(response => {
                     this.setState({
                         loggedIn: localStorage.getItem('loggedIn'),
                         user: response.data

@@ -7,7 +7,7 @@ class StudyStore {
     environ =  process.env.NODE_ENV === "production" ? "/projects/ReportSpecification/public" : "";
 
     loadAllStudies = async () => {
-        axios.get(`${this.environ}/api/studies`).then(response => {
+        axios.get(`/api/studies`).then(response => {
             runInAction(() =>{
                 this.studies = response.data;
             });
